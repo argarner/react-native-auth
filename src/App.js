@@ -1,11 +1,12 @@
 
 import React from 'react';
-import { SafeAreaView, Text } from 'react-native';
+import { SafeAreaView } from 'react-native';
+import { Header } from './components/common';
 
 const App = () => {
   return (
     <SafeAreaView>
-      <Text>App!</Text>
+      <Header headerText="App!" />
     </SafeAreaView>
   );
 };
