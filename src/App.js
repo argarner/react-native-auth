@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, ScrollView } from 'react-native';
 import {
   apiKey,
   authDomain,
@@ -10,12 +10,12 @@ import {
   appId,
 } from 'react-native-dotenv';
 import firebase from 'firebase';
-import { Header, Button, Card, CardSection } from './components/common';
+import { Header, Button, Spinner } from './components/common';
 import LoginForm from './components/LoginForm';
 
 class App extends React.Component {
   state = {
-    loggedIn: false,
+    loggedIn: null,
   }
 
   componentDidMount() {
@@ -34,19 +34,30 @@ class App extends React.Component {
     });
   }
 
+  renderContent = () => {
+    switch (this.state.loggedIn) {
+      case true:
+        return <Button onPress={() => firebase.auth().signOut()}>
+                  Log Out
+                </Button>;
+      case false:
+        return (
+          <>
+            <Header headerText="Auth" />
+            <LoginForm />
+          </>
+        );
+      default:
+        return <Spinner />;
+    }
+  }
+
   render() {
     return (
       <SafeAreaView>
-        <Header headerText="Auth" />
-        {!this.state.loggedIn
-          ? <LoginForm />
-          : (<Card>
-              <CardSection>
-                <Button>Log Out</Button>
-              </CardSection>
-            </Card>
-          )
-        }
+        <ScrollView>
+          {this.renderContent()}
+        </ScrollView>
       </SafeAreaView>
     );
   }
