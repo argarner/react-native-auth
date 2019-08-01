@@ -10,10 +10,14 @@ import {
   appId,
 } from 'react-native-dotenv';
 import firebase from 'firebase';
-import { Header } from './components/common';
+import { Header, Button, Card, CardSection } from './components/common';
 import LoginForm from './components/LoginForm';
 
 class App extends React.Component {
+  state = {
+    loggedIn: false,
+  }
+
   componentDidMount() {
     firebase.initializeApp({
       apiKey: apiKey,
@@ -24,12 +28,25 @@ class App extends React.Component {
       messagingSenderId: messagingSenderId,
       appId: appId,
     });
+
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({ loggedIn: user ? true : false });
+    });
   }
+
   render() {
     return (
       <SafeAreaView>
         <Header headerText="Auth" />
-        <LoginForm />
+        {!this.state.loggedIn
+          ? <LoginForm />
+          : (<Card>
+              <CardSection>
+                <Button>Log Out</Button>
+              </CardSection>
+            </Card>
+          )
+        }
       </SafeAreaView>
     );
   }
