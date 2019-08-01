@@ -29,11 +29,13 @@ const TextInputField = ({
   autoCorrect = false,
   autoCompleteType = 'off',
   secureTextEntry = false,
+  autoCapitalize = 'none',
 }) => {
   return (
     <StyledView>
       <StyledText>{label}</StyledText>
       <StyledTextInput
+        autoCapitalize={autoCapitalize}
         autoCorrect={autoCorrect}
         placeholder={placeholder}
         value={value}
