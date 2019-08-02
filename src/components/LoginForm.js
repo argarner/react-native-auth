@@ -19,6 +19,7 @@ class LoginForm extends Component {
     error: false,
     loading: false,
   }
+
   onButtonPress = () => {
     this.setState({ error: false, loading: true });
     const { email, password } = this.state;
@@ -31,6 +32,7 @@ class LoginForm extends Component {
           .catch(this.onLoginFail);
       });
   };
+
   onLoginSuccess = () => {
     console.log('onLoginSuccess');
     this.setState({
@@ -40,6 +42,7 @@ class LoginForm extends Component {
       loading: false,
     });
   }
+
   onLoginFail = (err) => {
     console.log('onLoginFail');
     this.setState({
@@ -47,6 +50,7 @@ class LoginForm extends Component {
       loading: false,
     });
   }
+
   render() {
     const { error, loading } = this.state;
     return (
@@ -60,6 +64,7 @@ class LoginForm extends Component {
           autoCompleteType="email"
           />
         </CardSection>
+
         <CardSection>
           <TextInputField
             label="Password"
@@ -70,7 +75,9 @@ class LoginForm extends Component {
             secureTextEntry // all that's needed for true
             />
         </CardSection>
+
         {error && <StyledErrorText>{error}</StyledErrorText>}
+
         <CardSection>
           <Button
             disabled={loading}
