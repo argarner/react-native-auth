@@ -21,15 +21,7 @@ const StyledTextInput = styled(TextInput)`
   flex: 2;
 `;
 
-const TextInputField = ({
-  placeholder,
-  label,
-  value,
-  onChangeText,
-  autoCorrect = false,
-  autoCompleteType = 'off',
-  secureTextEntry = false,
-  autoCapitalize = 'none',
+const TextInputField = ({ placeholder, label, value, onChangeText, autoCorrect = false, autoCompleteType = 'off', secureTextEntry = false, autoCapitalize = 'none',
 }) => {
   return (
     <StyledView>
